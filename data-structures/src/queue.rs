@@ -1,28 +1,34 @@
 use std;
+use std::io::Empty;
+use std::error::Error;
 
-struct Queue {
-    members: [i8]
+pub struct Queue {
+    members: Vec<i8>
 }
 
 impl Queue {
-    fn len(self) -> i32 {
+    pub fn new() -> Queue {
+        Queue {
+            members: Vec::new(),
+        }
+    }
+
+    pub fn len(self) -> usize {
         self.members.len()
     }
 
-    fn enqueue(&mut self, member: i8) {
-        self.members.append(member)
+    pub fn enqueue(&mut self, member: i8) {
+        self.members.push(member)
     }
 
-    fn dequeue(&mut self) -> Option<i8> {
-        if let Some(last, members) = self.members.split_last_mut() {
-            self.members = members;
-            last
+    pub fn dequeue(&mut self) -> Option<i8> {
+        match self.members.len() {
+            0 => None,
+            _ => Some(self.members.remove(0))
         }
-
-        None
     }
 
-    fn peek(self) -> Option<i8> {
-        self.members.last()
+    pub fn peek(self) -> Option<i8> {
+       Some(self.members[0])
     }
 }

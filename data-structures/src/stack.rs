@@ -1,28 +1,29 @@
 use std;
 
-struct Stack {
-    members: [i8]
+pub struct Stack {
+    members: Vec<i8>
 }
 
 impl Stack {
-    fn len(self) -> i32 {
+    pub fn new() -> Stack {
+        Stack {
+            members:Vec::new(),
+        }
+    }
+
+    pub fn len(self) -> usize {
         self.members.len()
     }
 
-    fn push(&mut self, member:i8) {
-        self.members = [[member], &self.members].concat()
+    pub fn push(&mut self, member:i8) {
+        self.members.push(member);
     }
 
-    fn pop(&mut self) -> Option<i8> {
-        if let Some(first, members) = self.members.split_first() {
-            self.members = members;
-            first
-        }
-
-        None
+    pub fn pop(&mut self) -> Option<i8> {
+        self.members.pop()
     }
 
-    fn peek(self) -> i8 {
-        self.members.first()
+    pub fn peek(self) -> Option<i8> {
+        Some(self.members[self.members.len() -1])
     }
 }

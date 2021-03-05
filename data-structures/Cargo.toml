@@ -1,5 +1,5 @@
 [package]
-name = "data-structures"
+name = "ctci_data_structures"
 version = "0.1.0"
 authors = ["derekstrickland"]
 edition = "2018"
