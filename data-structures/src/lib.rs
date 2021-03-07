@@ -37,7 +37,7 @@ mod tests {
         queue.enqueue(2);
         queue.enqueue(3);
 
-        assert_eq!(queue.peek().unwrap(), 1);
+        assert_eq!(*queue.peek().unwrap(), 1);
     }
 
     #[test]
@@ -72,6 +72,6 @@ mod tests {
         stack.push(2);
         stack.push(3);
 
-        assert_eq!(stack.peek().unwrap(), 3);
+        assert_eq!(*stack.peek().unwrap(), 3);
     }
 }

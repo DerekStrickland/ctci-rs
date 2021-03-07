@@ -1,11 +1,10 @@
-use std;
 
-pub struct Stack {
-    members: Vec<i8>
+pub struct Stack<T> {
+    members: Vec<T>
 }
 
-impl Stack {
-    pub fn new() -> Stack {
+impl<T> Stack<T> {
+    pub fn new() -> Self {
         Stack {
             members:Vec::new(),
         }
@@ -15,15 +14,15 @@ impl Stack {
         self.members.len()
     }
 
-    pub fn push(&mut self, member:i8) {
+    pub fn push(&mut self, member:T) {
         self.members.push(member);
     }
 
-    pub fn pop(&mut self) -> Option<i8> {
+    pub fn pop(&mut self) -> Option<T> {
         self.members.pop()
     }
 
-    pub fn peek(self) -> Option<i8> {
-        Some(self.members[self.members.len() -1])
+    pub fn peek(&self) -> Option<&T> {
+        self.members.last()
     }
 }

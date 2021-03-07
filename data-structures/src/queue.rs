@@ -1,13 +1,10 @@
-use std;
-use std::io::Empty;
-use std::error::Error;
 
-pub struct Queue {
-    members: Vec<i8>
+pub struct Queue<T> {
+    members: Vec<T>
 }
 
-impl Queue {
-    pub fn new() -> Queue {
+impl<T> Queue<T> {
+    pub fn new() -> Self {
         Queue {
             members: Vec::new(),
         }
@@ -17,18 +14,18 @@ impl Queue {
         self.members.len()
     }
 
-    pub fn enqueue(&mut self, member: i8) {
+    pub fn enqueue(&mut self, member: T) {
         self.members.push(member)
     }
 
-    pub fn dequeue(&mut self) -> Option<i8> {
+    pub fn dequeue(&mut self) -> Option<T> {
         match self.members.len() {
             0 => None,
             _ => Some(self.members.remove(0))
         }
     }
 
-    pub fn peek(self) -> Option<i8> {
-       Some(self.members[0])
+    pub fn peek(&self) -> Option<&T> {
+        self.members.first()
     }
 }
