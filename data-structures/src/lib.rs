@@ -1,5 +1,6 @@
 mod queue;
 mod stack;
+mod linked_list;
 
 #[cfg(test)]
 mod tests {
@@ -73,5 +74,16 @@ mod tests {
         stack.push(3);
 
         assert_eq!(*stack.peek().unwrap(), 3);
+    }
+
+    #[test]
+    fn test_singly_linked_list_add() {
+        let mut list = linked_list::SinglyLinkedList::new();
+
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        assert_eq!(3, list.len());
     }
 }
