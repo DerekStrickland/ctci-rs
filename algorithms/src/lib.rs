@@ -2,8 +2,8 @@ mod quicksort;
 
 #[cfg(test)]
 mod tests {
-    use rand::Rng;
     use crate::quicksort;
+    use rand::Rng;
 
     fn cut_deck() -> Vec<i32> {
         let ubound: usize = 1000;
@@ -22,7 +22,7 @@ mod tests {
             fulcrum = rng.gen_range(1..1000);
         }
 
-        let mut result:Vec<i32> = Vec::new();
+        let mut result: Vec<i32> = Vec::with_capacity(1000);
 
         result.extend_from_slice(&buffer[fulcrum..]);
         result.extend_from_slice(&buffer[..fulcrum]);
@@ -41,15 +41,17 @@ mod tests {
 
     #[test]
     fn test_quicksort() {
-        let items = cut_deck();
+        let mut items = cut_deck();
 
         let len = items.len() - 1;
-        let items = quicksort::sort(items, 1, len);
+        println!("len {}", len);
+        quicksort::sort(&mut items, 0, len);
 
         let mut index: usize = 0;
         while index < 1000 {
-            assert_eq!(*items.get(index).unwrap(), (index as i32) + 1);
-            index = index + 1;
+            println!("iteration {}", index);
+            assert_eq!(items[index], (index as i32) + 1);
+            index += 1;
         }
     }
 }

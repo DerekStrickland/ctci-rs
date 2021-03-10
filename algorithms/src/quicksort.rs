@@ -1,32 +1,48 @@
+pub fn sort(items: &mut Vec<i32>, left: usize, right: usize) {
+    let index = partition(items, left, right);
+    println!("left {}", left);
+    println!("right {}", right);
+    println!("index {}", index);
 
-pub fn sort(items: Vec<i32>, lo: usize, hi: usize) -> Vec<i32> {
-    if lo < hi {
-        let (part, items) = partition(items, lo, hi);
-        let items = sort(items, lo, part);
-        let items = sort(items, part + 1, hi);
+    if left < (index - 1) {
+        sort(items, left, index - 1);
+    }
 
-        items
-    } else {
-        items
+    if index < right {
+        sort(items, index, right);
     }
 }
 
-fn partition(mut items: Vec<i32>, lo: usize, hi: usize) -> (usize, Vec<i32>) {
-    let pivot = items[((hi + lo) / 2) as usize];
-    let mut i = lo - 1;
-    let j = hi + 1;
+fn partition(items: &mut Vec<i32>, left: usize, right: usize) -> usize {
+    let mut left = left;
+    let mut right = right;
 
-    loop {
-        while items[i] < pivot {
-            i = i + 1;
+    let pivot_index = (left + (right - left)) / 2;
+    println!("pivot_index {}", pivot_index);
+    let pivot = items[pivot_index];
+    println!("pivot {}", pivot);
+    while left <= right {
+        while items[left] < pivot {
+            left += 1;
         }
-        while items[j] > pivot {
-            if i >= j {
-                return (j, items);
-            } else {
-                items[i] = items[j];
-            }
+
+        //println!("left evaluated to {}", items[left]);
+
+        while items[right] > pivot {
+            right -= 1;
+        }
+
+        println!("right evaluated to {}", items[right]);
+
+        if left <= right {
+            println!("before swap {} - {}", items[left], items[right]);
+            items.swap(left, right);
+            println!("after swap {} - {}", items[left], items[right]);
+            left += 1;
+            right -= 1;
         }
     }
-}
 
+    println!("returning left {}", left);
+    left
+}
