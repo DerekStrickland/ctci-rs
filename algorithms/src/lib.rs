@@ -6,23 +6,22 @@ mod tests {
     use rand::Rng;
 
     fn cut_deck() -> Vec<i32> {
-        let ubound: usize = 1000;
         let mut index: usize = 0;
-        let mut buffer: [i32; 1000] = [0; 1000];
+        let mut buffer: [i32; 100] = [0; 100];
 
-        while index < ubound {
+        while index < 100 {
             buffer[index] = (index + 1) as i32;
             index = index + 1;
         }
 
         let mut rng = rand::thread_rng();
-        let mut fulcrum = rng.gen_range(1..1000);
+        let mut fulcrum = rng.gen_range(1..100);
 
-        while fulcrum == ubound {
-            fulcrum = rng.gen_range(1..1000);
+        while fulcrum == 100 {
+            fulcrum = rng.gen_range(1..100);
         }
 
-        let mut result: Vec<i32> = Vec::with_capacity(1000);
+        let mut result: Vec<i32> = Vec::with_capacity(100);
 
         result.extend_from_slice(&buffer[fulcrum..]);
         result.extend_from_slice(&buffer[..fulcrum]);
@@ -48,9 +47,9 @@ mod tests {
         quicksort::sort(&mut items, 0, len);
 
         let mut index: usize = 0;
-        while index < 1000 {
-            println!("iteration {}", index);
-            assert_eq!(items[index], (index as i32) + 1);
+        while index < 100 {
+            println!("iteration {}, element: {}", index, items[index]);
+            assert_eq!(items[index] - 1, (index as i32));
             index += 1;
         }
     }
