@@ -100,11 +100,18 @@ mod tests {
         let mut items = cut_deck2();
         let mut index: usize = 0;
 
+        while index < 100 {
+            println!("items {}, element value: {}", index, items[index]);
+            index+=1;
+        }
+
+        index = 0;
+
         mergesort::top_down_sort(&mut items);
 
-        while index < 100 {
-            println!("test_top_down_mergesort iteration {}, element value: {}", index+1, items[index]);
-            assert_eq!(items[index] - 1, (index as i32));
+        while index < items.len() {
+            println!("test_top_down_mergesort iteration {}, element value: {}", index, items[index]);
+            assert_eq!(items[index], (index as i32)+1);
             index += 1;
         }
     }
