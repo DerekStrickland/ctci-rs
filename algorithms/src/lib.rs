@@ -116,16 +116,16 @@ mod tests {
         }
     }
 
-    // #[test]
-    // fn test_bottom_up_mergesort() {
-    //     let mut items = cut_deck2();
-    //     mergesort::top_down_sort(&mut items);
-    //
-    //     let mut index: usize = 0;
-    //     while index < 100 {
-    //         println!("iteration {}, element: {}", index, items[index]);
-    //         assert_eq!(items[index] - 1, (index as i32));
-    //         index += 1;
-    //     }
-    // }
+    #[test]
+    fn test_bottom_up_mergesort() {
+        let mut items = cut_deck2();
+        mergesort::bottom_up_sort(&mut items);
+
+        let mut index: usize = 0;
+        while index < 100 {
+            println!("test_bottom_up_mergesort iteration {}, element: {}", index, items[index]);
+            assert_eq!(items[index] - 1, (index as i32));
+            index += 1;
+        }
+    }
 }
